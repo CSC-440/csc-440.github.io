@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Group Five Clickables</title>
+<style>
+    
+body {
+  font-family: sans-serif;
+  font-size: 1em;
+  color: #333;
+  background-color: #ddd;
+}
+
+#main_contain {
+  width: 80%;
+  margin: 0 auto;
+}
+
+label {
+  clear: both;
+  display: block;
+  font-size: 0.85em;
+  font-weight: bold;
+  padding: 0.8em 0 0.2em 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input,
+button {
+  float: left;
+  font-size: 1em;
+  padding: 3px 6px;
+  margin: 0;
+  border: 1px solid #333;
+  outline: 0;
+  box-shadow: none;
+}
+
+::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+input {
+  width: 75%;
+  background-color: #fff;
+  border-right: 0 none;
+  border-radius: 3px 0 0 3px;
+}
+
+button {
+  position: relative;
+  background-color: #aaa;
+  border-radius: 0 3px 3px 0;
+  cursor: pointer;
+}
+
+.copied::after {
+  position: absolute;
+  top: 12%;
+  right: 110%;
+  display: block;
+  content: "copied";
+  font-size: 0.75em;
+  padding: 2px 3px;
+  color: #fff;
+  background-color: #22a;
+  border-radius: 3px;
+  opacity: 0;
+  will-change: opacity, transform;
+  -webkit-animation: showcopied 1.5s ease;
+  animation: showcopied 1.5s ease;
+}
+
+@-webkit-keyframes showcopied {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+  70% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes showcopied {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+  70% {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+  <div id="main_contain">
+
+    <label for="website">Download Your Choice Repositories.</label>
+    <input type="text" id="download_choice_repos" value="bash <(curl -s https://gist.githubusercontent.com/EntropyHaos/0e0f86b526853f6dd57aed051a4ef5ef/raw/setup_cloud9_for_csc440_team_five.bash)" />
+    <button data-copytarget="#download_choice_repos">copy</button>
+
+    <!-- 
+    
+    https://gist.githubusercontent.com/EntropyHaos/0e0f86b526853f6dd57aed051a4ef5ef/raw/setup_cloud9_for_csc440_team_five.bash
+    
+    <label for="website">Setup Java Spark demo on C9.</label>
+    <input type="text" id="setup_java_spark_demo_on_c9" value="bash <(curl -s https://raw.githubusercontent.com/EntropyHaos/java_spark_demo_base/master/install_sparks_demo_fast.bash)" />
+    <button data-copytarget="#setup_java_spark_demo_on_c9">copy</button>
+
+    <label for="website">Create a Haos BASH!</label>
+    <input type="text" id="clone_haos_bash" value="git clone https://gitlab.com/ewha_spring_2016/z_spring_2016_bash_toolset.git z_" />
+    <button data-copytarget="#clone_haos_bash">copy</button>
+
+    <label for="website">Mod Cloud9 ssh for admin purposes.</label>
+    <input type="text" id="mod_c9_ssh" value="bash <(curl -s https://gist.githubusercontent.com/haosgypsy/4898e7c8f3f46b8274ebf4e957d5c3e6/raw/setup_ssh_on_cloud9.bash)" />
+    <button data-copytarget="#mod_c9_ssh">copy</button>
+
+    <label for="website">Setup a Haos reveal!</label>
+    <input type="text" id="setup_reveal" value="bash <(curl -s https://gitlab.com/ewha_spring_2016/z_spring_2016_bash_toolset/raw/master/haos_bash/setup_reveal_js_on_gh_pages.bash)" />
+    <button data-copytarget="#setup_reveal">copy</button>
+    -->
+
+  </div>
+
+<script>
+    
+/*
+	Copy text from any appropriate field to the clipboard!
+  Sourced from : https://www.sitepoint.com/javascript-copy-to-clipboard/
+  Generously made available by : Craig Buckler, @craigbuckler
+  
+  B.Haos is using it, abusing it, and doing whatever he likes with it!
+  (Per Sir Buckler's request!)
+*/
+(function() {
+
+	'use strict';
+  
+  // click events
+  document.body.addEventListener('click', copy, true);
+
+	// event handler
+	function copy(e) {
+
+    // find target element
+    var 
+      t = e.target,
+      c = t.dataset.copytarget,
+      inp = (c ? document.querySelector(c) : null);
+      
+    // is element selectable?
+    if (inp && inp.select) {
+      
+      // select text
+      inp.select();
+
+      try {
+        // copy text
+        document.execCommand('copy');
+        inp.blur();
+        
+        // copied animation
+        t.classList.add('copied');
+        setTimeout(function() { t.classList.remove('copied'); }, 1500);
+      }
+      catch (err) {
+        alert('please press Ctrl/Cmd+C to copy');
+      }
+      
+    }
+    
+	}
+
+})();
+
+</script>
+</body>
+
+</html>
